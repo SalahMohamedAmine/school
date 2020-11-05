@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+    <div ng-app="myApp" ng-controller="customerController">
+        <table id="customers">
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+            <tr ng-repeat="customer in customers">
+                <td>{{customer.Name}}</td>
+                <td>{{customer.City}}</td>
+                <td>{{customer.Country}}</td>
+            </tr>
+        </table>
+    </div>
+
+ <script>
+     var app = angular.module('myApp',[]);
+     app.controller('customerController', function($scope,$http) {
+         $http.get("operation.php")
+         .then(function(response) {
+             $scope.customers = response.data.records;
+         });
+     })
+ </script>   
+    
+
+
+
+</body>
+</html>
